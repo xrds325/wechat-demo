@@ -39,6 +39,7 @@ public class WechatController {
     public void reply(HttpServletRequest request, HttpServletResponse response){
 
         try {
+            System.out.println("test git hub");
             PrintWriter writer = response.getWriter();
             Map<String,String> map = MessageUtil.xmlToMap(request);
             String toUserName = map.get("ToUserName");
