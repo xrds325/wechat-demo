@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+</head>
+<body>
+    <form id="info" enctype="multipart/form-data">
+        <select id="type" name="type">
+            <option value="image">图片</option>
+            <option value="voice">语音</option>
+            <option value="video">视频</option>
+            <option value="thumb">缩略图</option>
+        </select>
+        <input type="file" name="uploadFile">
+        <input id="button" type="button" value="提交">
+    </form>
+<script>
+    $("#button").click(function () {
+        getUrl();
+    })
+    function getUrl(){
+        var uploadURL;
+        $.ajax({
+            url:"getUrl.do",
+            data:"type="+$("#type").val(),
+            type:"post",
+            dataType:"json",
+            success:function(obj){
+                uploadURL = obj.data;
+                getMediaId(uploadURL);
+            }
+        })
+    }
+    function getMediaId(uploadURL){
+        var url = uploadURL;
+        var data =new FormData($("#info")[0]);
+        data.delete("type");
+        alert(url);
+        $.ajax({
+            url:uploadURL,
+            data: data,
+            type:"POST",
+            dataType:"jsonp",
+            contentType:false,
+            //取消帮我们格式化数据，是什么就是什么
+            processData:false,
+            success:function (obj) {
+                console.log(obj);
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+server:
+  port: 80
+  tomcat:
+    uri-encoding: UTF-8
+wechat:
+  appID: wx6091c48473e4b4ee
+  appSecret: 671fcee01326428525989e0679882d48
+  token: 123456
+  url: http://xrds325.natapp1.cc/wechat/portal
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  mvc:
+    static-path-pattern: /static/**
